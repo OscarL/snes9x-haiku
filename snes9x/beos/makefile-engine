@@ -38,7 +38,7 @@ RESCOMP	:= rc
 CC		:= $(CC)
 C++		:= $(CXX)
 AS		:= nasm
-ASFLAGS	:= -f elf32 $(ASSEMBLER_FLAGS)
+ASFLAGS	:= -f elf64 $(ASSEMBLER_FLAGS)
 
 
 # Set up CFLAGS/CXXFLAGS.

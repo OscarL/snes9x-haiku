@@ -112,8 +112,8 @@ void draw_line16to16(uint8 *src, uint8 *dst, int w)
 	"1:\n"
 	"movw (%0), %%ax\n"
 	"movw %%ax, (%1)\n"
-	"addl $2, %0\n"
-	"addl $2, %1\n"
+	"add $2, %0\n"
+	"add $2, %1\n"
 	"decl %2\n"
 	"testb $7, %%cl\n"
 	"jne 1b\n"
@@ -123,8 +123,8 @@ void draw_line16to16(uint8 *src, uint8 *dst, int w)
 	"3:\n"
 	"movq (%0), %%mm0\n"
 	"movq %%mm0, (%1)\n"
-	"addl $8, %0\n"
-	"addl $8, %1\n"
+	"add $8, %0\n"
+	"add $8, %1\n"
 	"decl %2\n"
 	"jnz 3b\n"
 	"4:\n"
@@ -143,8 +143,8 @@ void draw_line16to16double(uint8 *src, uint8 *dst, int w, int type)
 		"1:\n"
 		"movl (%0), %%eax\n"
 		"movl %%eax, (%1)\n"
-		"addl $4, %0\n"
-		"addl $4, %1\n"
+		"add $4, %0\n"
+		"add $4, %1\n"
 		"decl %2\n"
 		"testb $7, %%cl\n"
 		"jne 1b\n"
@@ -157,8 +157,8 @@ void draw_line16to16double(uint8 *src, uint8 *dst, int w, int type)
 		"movq 8(%0), %%mm1\n"
 		"movq %%mm0, (%1)\n"
 		"movq %%mm1, 8(%1)\n"
-		"addl $16, %0\n"
-		"addl $16, %1\n"
+		"add $16, %0\n"
+		"add $16, %1\n"
 		"decl %2\n"
 		"jnz 3b\n"
 		".p2align 4,,7\n"
@@ -176,8 +176,8 @@ void draw_line16to16double(uint8 *src, uint8 *dst, int w, int type)
 		"movw (%0), %%ax\n"
 		"movw %%ax, (%1)\n"
 		"movw %%ax, 2(%1)\n"
-		"addl $2, %0\n"
-		"addl $4, %1\n"
+		"add $2, %0\n"
+		"add $4, %1\n"
 		"decl %2\n"
 		"testb $7, %%cl\n"
 		"jne 1b\n"
@@ -192,8 +192,8 @@ void draw_line16to16double(uint8 *src, uint8 *dst, int w, int type)
 		"punpckhwd %%mm1, %%mm1\n"
 		"movq %%mm0, (%1)\n"
 		"movq %%mm1, 8(%1)\n"
-		"addl $8, %0\n"
-		"addl $16, %1\n"
+		"add $8, %0\n"
+		"add $16, %1\n"
 		"decl %2\n"
 		"jnz 3b\n"
 		".p2align 4,,7\n"
@@ -220,8 +220,8 @@ void draw_line16to16lcd(uint8 *src, uint8 *dst, int w, int type)
 		"pslld $16, %%mm1\n"
 		"psrld $16, %%mm1\n"
 		"movq %%mm1, 8(%1)\n"
-		"addl $16, %0\n"
-		"addl $16, %1\n"
+		"add $16, %0\n"
+		"add $16, %1\n"
 		"decl %2\n"
 		"jnz 1b\n"
 		".p2align 4,,7\n"
@@ -246,8 +246,8 @@ void draw_line16to16lcd(uint8 *src, uint8 *dst, int w, int type)
 		"pslld $16, %%mm1\n"
 		"psrld $16, %%mm1\n"
 		"movq %%mm1, 8(%1)\n"
-		"addl $8, %0\n"
-		"addl $16, %1\n"
+		"add $8, %0\n"
+		"add $16, %1\n"
 		"decl %2\n"
 		"jnz 1b\n"
 		".p2align 4,,7\n"
@@ -280,8 +280,8 @@ void draw_line16to32(uint8 *src, uint8 *dst, int w)
 	"orl %%edx, %%eax\n"
 		
 	"movl %%eax, (%1)\n"
-	"addl $2, %0\n"
-	"addl $4, %1\n"
+	"add $2, %0\n"
+	"add $4, %1\n"
 	"decl %2\n"
 	"testb $7, %%cl\n"
 	"jne 1b\n"
@@ -307,8 +307,8 @@ void draw_line16to32(uint8 *src, uint8 *dst, int w)
 				 
 	"movq %%mm0, (%1)\n"
 				 
-	"addl $4, %0\n"
-	"addl $8, %1\n"
+	"add $4, %0\n"
+	"add $8, %1\n"
 	"decl %%ecx\n"
 	"jnz 3b\n"
 	"4:\n"
@@ -322,134 +322,134 @@ void draw_line16to32double(uint8 *src, uint8 *dst, int w, int type)
 	if(type == 4)
 	{
 		asm(
-		"testb $7, %%cl
-		je 2f
-		.p2align 4,,7
-		1:
-		movw (%0), %%ax
-		movl %%eax, %%ebx
+		"testb $7, %%cl\n"
+		"je 2f\n"
+		".p2align 4,,7\n"
+		"1:\n"
+		"movw (%0), %%ax\n"
+		"movl %%eax, %%ebx\n"
 		
-		andl $0xf800, %%eax
-		shll $8, %%eax
+		"andl $0xf800, %%eax\n"
+		"shll $8, %%eax\n"
+
+		"movl %%ebx, %%edx\n"
+		"andl $0x07e0, %%ebx\n"
+		"shll $5, %%ebx\n"
+		"orl %%ebx, %%eax\n"
 		
-		movl %%ebx, %%edx
-		andl $0x07e0, %%ebx
-		shll $5, %%ebx
-		orl %%ebx, %%eax
+		"andl $0x001f, %%edx\n"
+		"shll $3, %%edx\n"
+		"orl %%edx, %%eax\n"
 		
-		andl $0x001f, %%edx
-		shll $3, %%edx
-		orl %%edx, %%eax
+		"movl %%eax, (%1)\n"
 		
-		movl %%eax, (%1)
+		"movw 2(%0), %%ax\n"
+		"movl %%eax, %%ebx\n"
 		
-		movw 2(%0), %%ax
-		movl %%eax, %%ebx
+		"andl $0xf800, %%eax\n"
+		"shll $8, %%eax\n"
 		
-		andl $0xf800, %%eax
-		shll $8, %%eax
+		"movl %%ebx, %%edx\n"
+		"andl $0x07e0, %%ebx\n"
+		"shll $5, %%ebx\n"
+		"orl %%ebx, %%eax\n"
 		
-		movl %%ebx, %%edx
-		andl $0x07e0, %%ebx
-		shll $5, %%ebx
-		orl %%ebx, %%eax
+		"andl $0x001f, %%edx\n"
+		"shll $3, %%edx\n"
+		"orl %%edx, %%eax\n"
 		
-		andl $0x001f, %%edx
-		shll $3, %%edx
-		orl %%edx, %%eax
+		"movl %%eax, 4(%1)\n"
 		
-		movl %%eax, 4(%1)
+		"add $4, %0\n"
+		"add $8, %1\n"
+		"decl %2\n"
+		"testb $7, %%cl\n"
+		"jne 1b\n"
+		"2:\n"
+		"sarl $2, %2\n"
+		"jz 4f\n"
+		".p2align 4,,7\n"
+		"3:\n"
+		"movq (%0), %%mm0\n"
+		"movq 8(%0), %%mm1\n"
 		
-		addl $4, %0
-		addl $8, %1
-		decl %2
-		testb $7, %%cl
-		jne 1b
-		2:
-		sarl $2, %2
-		jz 4f
-		.p2align 4,,7
-		3:
-		movq (%0), %%mm0
-		movq 8(%0), %%mm1
+		"movq %%mm0, %%mm2\n"
+		"punpcklwd %%mm2, %%mm2\n"
+		"movq %%mm2, %%mm3\n"
+		"pand REDS, %%mm2\n"
+		"pslld $8, %%mm2\n"
 		
-		movq %%mm0, %%mm2
-		punpcklwd %%mm2, %%mm2
-		movq %%mm2, %%mm3
-		pand REDS, %%mm2
-		pslld $8, %%mm2
+		"movq %%mm3, %%mm4\n"
+		"pand GREENS, %%mm3\n"
+		"pslld $5, %%mm3\n"
+		"por %%mm3, %%mm2\n"
 		
-		movq %%mm3, %%mm4
-		pand GREENS, %%mm3
-		pslld $5, %%mm3
-		por %%mm3, %%mm2
+		"pand BLUES, %%mm4\n"
+		"pslld $3, %%mm4\n"
+		"por %%mm4, %%mm2\n"
 		
-		pand BLUES, %%mm4
-		pslld $3, %%mm4
-		por %%mm4, %%mm2
+		"movq %%mm2, (%1)\n"
 		
-		movq %%mm2, (%1)
+		"punpckhdq %%mm0, %%mm0\n"
+		"movq %%mm0, %%mm2\n"
+		"punpcklwd %%mm2, %%mm2\n"
+		"movq %%mm2, %%mm3\n"
+		"pand REDS, %%mm2\n"
+		"pslld $8, %%mm2\n"
 		
-		punpckhdq %%mm0, %%mm0
-		movq %%mm0, %%mm2
-		punpcklwd %%mm2, %%mm2
-		movq %%mm2, %%mm3
-		pand REDS, %%mm2
-		pslld $8, %%mm2
+		"movq %%mm3, %%mm4\n"
+		"pand GREENS, %%mm3\n"
+		"pslld $5, %%mm3\n"
+		"por %%mm3, %%mm2\n"
 		
-		movq %%mm3, %%mm4
-		pand GREENS, %%mm3
-		pslld $5, %%mm3
-		por %%mm3, %%mm2
+		"pand BLUES, %%mm4\n"
+		"pslld $3, %%mm4\n"
+		"por %%mm4, %%mm2\n"
 		
-		pand BLUES, %%mm4
-		pslld $3, %%mm4
-		por %%mm4, %%mm2
+		"movq %%mm2, 8(%1)\n"
 		
-		movq %%mm2, 8(%1)
+		"movq %%mm1, %%mm2\n"
+		"punpcklwd %%mm2, %%mm2\n"
+		"movq %%mm2, %%mm3\n"
+		"pand REDS, %%mm2\n"
+		"pslld $8, %%mm2\n"
 		
-		movq %%mm1, %%mm2
-		punpcklwd %%mm2, %%mm2
-		movq %%mm2, %%mm3
-		pand REDS, %%mm2
-		pslld $8, %%mm2
+		"movq %%mm3, %%mm4\n"
+		"pand GREENS, %%mm3\n"
+		"pslld $5, %%mm3\n"
+		"por %%mm3, %%mm2\n"
 		
-		movq %%mm3, %%mm4
-		pand GREENS, %%mm3
-		pslld $5, %%mm3
-		por %%mm3, %%mm2
+		"pand BLUES, %%mm4\n"
+		"pslld $3, %%mm4\n"
+		"por %%mm4, %%mm2\n"
 		
-		pand BLUES, %%mm4
-		pslld $3, %%mm4
-		por %%mm4, %%mm2
-		
-		movq %%mm2, 16(%1)
+		"movq %%mm2, 16(%1)\n"
 		
 		
-		punpckhdq %%mm1, %%mm1
-		movq %%mm1, %%mm2
-		punpcklwd %%mm2, %%mm2
-		movq %%mm2, %%mm3
-		pand REDS, %%mm2
-		pslld $8, %%mm2
+		"punpckhdq %%mm1, %%mm1\n"
+		"movq %%mm1, %%mm2\n"
+		"punpcklwd %%mm2, %%mm2\n"
+		"movq %%mm2, %%mm3\n"
+		"pand REDS, %%mm2\n"
+		"pslld $8, %%mm2\n"
 		
-		movq %%mm3, %%mm4
-		pand GREENS, %%mm3
-		pslld $5, %%mm3
-		por %%mm3, %%mm2
+		"movq %%mm3, %%mm4\n"
+		"pand GREENS, %%mm3\n"
+		"pslld $5, %%mm3\n"
+		"por %%mm3, %%mm2\n"
 		
-		pand BLUES, %%mm4
-		pslld $3, %%mm4
-		por %%mm4, %%mm2
+		"pand BLUES, %%mm4\n"
+		"pslld $3, %%mm4\n"
+		"por %%mm4, %%mm2\n"
 		
-		movq %%mm2, 24(%1)
+		"movq %%mm2, 24(%1)\n"
 		
-		addl $16, %0
-		addl $32, %1
-		decl %2
-		jnz 3b
-		.p2align 4,,7
-		4:"
+		"add $16, %0\n"
+		"add $32, %1\n"
+		"decl %2\n"
+		"jnz 3b\n"
+		".p2align 4,,7\n"
+		"4:"
 		:
 		: "S"(src), "D"(dst), "c"(w)
 		: "%ebx", "%edx");
@@ -457,121 +457,121 @@ void draw_line16to32double(uint8 *src, uint8 *dst, int w, int type)
 	else
 	{
 		asm(
-		"testb $7, %%cl
-		je 2f
-		.p2align 4,,7
-		1:
-		movw (%0), %%ax
-		movl %%eax, %%ebx
+		"testb $7, %%cl\n"
+		"je 2f\n"
+		".p2align 4,,7\n"
+		"1:\n"
+		"movw (%0), %%ax\n"
+		"movl %%eax, %%ebx\n"
 		
-		andl $0xf800, %%eax
-		shl $8, %%eax
+		"andl $0xf800, %%eax\n"
+		"shl $8, %%eax\n"
 		
-		movl %%ebx, %%edx
-		andl $0x07e0, %%ebx
-		shl $5, %%ebx
-		orl %%ebx, %%eax
+		"movl %%ebx, %%edx\n"
+		"andl $0x07e0, %%ebx\n"
+		"shl $5, %%ebx\n"
+		"orl %%ebx, %%eax\n"
 		
-		andl $0x001f, %%edx
-		shl $3, %%edx
-		orl %%edx, %%eax
+		"andl $0x001f, %%edx\n"
+		"shl $3, %%edx\n"
+		"orl %%edx, %%eax\n"
 		
-		movl %%eax, (%1)
-		movl %%eax, 4(%1)
-		addl $2, %0
-		addl $8, %1
-		decl %2
-		testb $7, %%cl
-		jne 1b
-		2:
-		sarl $2, %2
-		jz 4f
-		.p2align 4,,7
-		3:
-		movq (%0), %%mm0
-		movq %%mm0, %%mm1
-		punpcklwd %%mm0, %%mm0
-		punpckhwd %%mm1, %%mm1
-		
-		
-		movq %%mm0, %%mm2
-		punpcklwd %%mm2, %%mm2
-		movq %%mm2, %%mm3
-		pand REDS, %%mm2
-		pslld $8, %%mm2
-		
-		movq %%mm3, %%mm4
-		pand GREENS, %%mm3
-		pslld $5, %%mm3
-		por %%mm3, %%mm2
-		
-		pand BLUES, %%mm4
-		pslld $3, %%mm4
-		por %%mm4, %%mm2
-		
-		movq %%mm2, (%1)
-		
-		punpckhdq %%mm0, %%mm0
-		movq %%mm0, %%mm2
-		punpcklwd %%mm2, %%mm2
-		movq %%mm2, %%mm3
-		pand REDS, %%mm2
-		pslld $8, %%mm2
-		
-		movq %%mm3, %%mm4
-		pand GREENS, %%mm3
-		pslld $5, %%mm3
-		por %%mm3, %%mm2
-		
-		pand BLUES, %%mm4
-		pslld $3, %%mm4
-		por %%mm4, %%mm2
-		
-		movq %%mm2, 8(%1)
+		"movl %%eax, (%1)\n"
+		"movl %%eax, 4(%1)\n"
+		"add $2, %0\n"
+		"add $8, %1\n"
+		"decl %2\n"
+		"testb $7, %%cl\n"
+		"jne 1b\n"
+		"2:\n"
+		"sarl $2, %2\n"
+		"jz 4f\n"
+		".p2align 4,,7\n"
+		"3:\n"
+		"movq (%0), %%mm0\n"
+		"movq %%mm0, %%mm1\n"
+		"punpcklwd %%mm0, %%mm0\n"
+		"punpckhwd %%mm1, %%mm1\n"
 		
 		
-		movq %%mm1, %%mm2
-		punpcklwd %%mm2, %%mm2
-		movq %%mm2, %%mm3
-		pand REDS, %%mm2
-		pslld $8, %%mm2
+		"movq %%mm0, %%mm2\n"
+		"punpcklwd %%mm2, %%mm2\n"
+		"movq %%mm2, %%mm3\n"
+		"pand REDS, %%mm2\n"
+		"pslld $8, %%mm2\n"
 		
-		movq %%mm3, %%mm4
-		pand GREENS, %%mm3
-		pslld $5, %%mm3
-		por %%mm3, %%mm2
+		"movq %%mm3, %%mm4\n"
+		"pand GREENS, %%mm3\n"
+		"pslld $5, %%mm3\n"
+		"por %%mm3, %%mm2\n"
 		
-		pand BLUES, %%mm4
-		pslld $3, %%mm4
-		por %%mm4, %%mm2
+		"pand BLUES, %%mm4\n"
+		"pslld $3, %%mm4\n"
+		"por %%mm4, %%mm2\n"
 		
-		movq %%mm2, 16(%1)
+		"movq %%mm2, (%1)\n"
+		
+		"punpckhdq %%mm0, %%mm0\n"
+		"movq %%mm0, %%mm2\n"
+		"punpcklwd %%mm2, %%mm2\n"
+		"movq %%mm2, %%mm3\n"
+		"pand REDS, %%mm2\n"
+		"pslld $8, %%mm2\n"
+		
+		"movq %%mm3, %%mm4\n"
+		"pand GREENS, %%mm3\n"
+		"pslld $5, %%mm3\n"
+		"por %%mm3, %%mm2\n"
+		
+		"pand BLUES, %%mm4\n"
+		"pslld $3, %%mm4\n"
+		"por %%mm4, %%mm2\n"
+		
+		"movq %%mm2, 8(%1)\n"
 		
 		
-		punpckhdq %%mm1, %%mm1
-		movq %%mm1, %%mm2
-		punpcklwd %%mm2, %%mm2
-		movq %%mm2, %%mm3
-		pand REDS, %%mm2
-		pslld $8, %%mm2
+		"movq %%mm1, %%mm2\n"
+		"punpcklwd %%mm2, %%mm2\n"
+		"movq %%mm2, %%mm3\n"
+		"pand REDS, %%mm2\n"
+		"pslld $8, %%mm2\n"
 		
-		movq %%mm3, %%mm4
-		pand GREENS, %%mm3
-		pslld $5, %%mm3
-		por %%mm3, %%mm2
+		"movq %%mm3, %%mm4\n"
+		"pand GREENS, %%mm3\n"
+		"pslld $5, %%mm3\n"
+		"por %%mm3, %%mm2\n"
 		
-		pand BLUES, %%mm4
-		pslld $3, %%mm4
-		por %%mm4, %%mm2
+		"pand BLUES, %%mm4\n"
+		"pslld $3, %%mm4\n"
+		"por %%mm4, %%mm2\n"
 		
-		movq %%mm2, 24(%1)
+		"movq %%mm2, 16(%1)\n"
 		
-		addl $8, %0
-		addl $32, %1
-		decl %2
-		jnz 3b
-		.p2align 4,,7
-		4:"
+		
+		"punpckhdq %%mm1, %%mm1\n"
+		"movq %%mm1, %%mm2\n"
+		"punpcklwd %%mm2, %%mm2\n"
+		"movq %%mm2, %%mm3\n"
+		"pand REDS, %%mm2\n"
+		"pslld $8, %%mm2\n"
+		
+		"movq %%mm3, %%mm4\n"
+		"pand GREENS, %%mm3\n"
+		"pslld $5, %%mm3\n"
+		"por %%mm3, %%mm2\n"
+		
+		"pand BLUES, %%mm4\n"
+		"pslld $3, %%mm4\n"
+		"por %%mm4, %%mm2\n"
+		
+		"movq %%mm2, 24(%1)\n"
+		
+		"add $8, %0\n"
+		"add $32, %1\n"
+		"decl %2\n"
+		"jnz 3b\n"
+		".p2align 4,,7\n"
+		"4:"
 		:
 		: "S"(src), "D"(dst), "c"(w)
 		: "%ebx", "%edx");
@@ -605,8 +605,8 @@ void draw_line16to32lcd(uint8 *src, uint8 *dst, int w, int type)
 		
 		"movl %%eax, (%1)\n"
 		
-		"addl $4, %0\n"
-		"addl $8, %1\n"
+		"add $4, %0\n"
+		"add $8, %1\n"
 		"decl %2\n"
 		"testb $7, %%cl\n"
 		"jne 1b\n"
@@ -696,8 +696,8 @@ void draw_line16to32lcd(uint8 *src, uint8 *dst, int w, int type)
 		"psrlq $32, %%mm2\n"
 		"movq %%mm2, 24(%1)\n"
 		
-		"addl $16, %0\n"
-		"addl $32, %1\n"
+		"add $16, %0\n"
+		"add $32, %1\n"
 		"decl %2\n"
 		"jnz 3b\n"
 		".p2align 4,,7\n"
@@ -731,8 +731,8 @@ void draw_line16to32lcd(uint8 *src, uint8 *dst, int w, int type)
 		
 		"movl %%eax, (%1)\n"
 		"movl %%ebx, 4(%1)\n"
-		"addl $2, %0\n"
-		"addl $8, %1\n"
+		"add $2, %0\n"
+		"add $8, %1\n"
 		"decl %2\n"
 		"testb $7, %%cl\n"
 		"jne 1b\n"
@@ -824,8 +824,8 @@ void draw_line16to32lcd(uint8 *src, uint8 *dst, int w, int type)
 		"psrlq $32, %%mm2\n"
 		"movq %%mm2, 24(%1)\n"
 		
-		"addl $8, %0\n"
-		"addl $32, %1\n"
+		"add $8, %0\n"
+		"add $32, %1\n"
 		"decl %2\n"
 		"jnz 3b\n"
 		".p2align 4,,7\n"

@@ -198,7 +198,17 @@ DEBUGGER :=
 ASSEMBLER_FLAGS = -I../ -DZSNES_FX
 
 #	Specify any additional compiler flags to be used.
-COMPILER_FLAGS = -Wall -Wno-multichar -Wno-ctor-dtor-privacy -Woverloaded-virtual -O3 -DZLIB -DJOYSTICK_SUPPORT -DSIDEWINDER_SUPPORT -DGRIP_SUPPORT -DSPC700_SHUTDOWN -DCPU_SHUTDOWN -DNO_INLINE_SET_GET -DVAR_CYCLES -DEXECUTE_SUPERFX_PER_LINE -DZSNES_FX -DEXECUTE_SUPERFX_PER_LINE -DZSNES_C4  -DUSE_THREADS -DSPC700_C  -DUNZIP_SUPPORT -DHAVE_3DNOW -DMMX -fomit-frame-pointer -march=pentium -pipe
+
+# Flags for x86-32
+#COMPILER_FLAGS = -Wall -Wno-multichar -Wno-ctor-dtor-privacy -Woverloaded-virtual -O3 -DZLIB -DJOYSTICK_SUPPORT -DSIDEWINDER_SUPPORT -DGRIP_SUPPORT -DSPC700_SHUTDOWN -DCPU_SHUTDOWN -DNO_INLINE_SET_GET -DVAR_CYCLES -DEXECUTE_SUPERFX_PER_LINE -DZSNES_FX -DEXECUTE_SUPERFX_PER_LINE -DZSNES_C4  -DUSE_THREADS -DSPC700_C  -DUNZIP_SUPPORT -DHAVE_3DNOW -DMMX -fomit-frame-pointer -march=pentium -pipe
+
+# Flags for x86-64
+COMPILER_FLAGS = -Wno-multichar -Wno-ctor-dtor-privacy -Woverloaded-virtual -O3 -DZLIB -DJOYSTICK_SUPPORT -DSIDEWINDER_SUPPORT -DGRIP_SUPPORT -DSPC700_SHUTDOWN -DCPU_SHUTDOWN -DNO_INLINE_SET_GET -DVAR_CYCLES -DEXECUTE_SUPERFX_PER_LINE -DZSNES_FX -DEXECUTE_SUPERFX_PER_LINE -DZSNES_C4  -DUSE_THREADS -DSPC700_C  -DUNZIP_SUPPORT -DMMX -fomit-frame-pointer \
+	-fpermissive \
+	-Wno-narrowing -Wno-register -Wno-maybe-uninitialized -Wno-write-strings -Wno-parentheses -Wno-misleading-indentation -Wno-restrict \
+	-pipe -fPIC
+	#--save-temps
+
 
 #	Specify any additional linker flags to be used.
 LINKER_FLAGS =

@@ -109,7 +109,7 @@ struct SAPURegisters APURegisters;
 
 struct SSettings Settings;
 
-struct SDSP1 DSP1;
+//extern struct SDSP1 DSP1;
 
 struct SSA1Registers SA1Registers;
 
