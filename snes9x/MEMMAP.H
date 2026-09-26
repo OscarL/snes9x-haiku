@@ -1,0 +1,1 @@
+/Data1/OscarL/snes9x/snes9x/memmap.h

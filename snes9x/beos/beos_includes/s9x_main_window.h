@@ -18,7 +18,7 @@ class s9x_config_window;
 class s9x_refresh_window;
 class GameMenuBar;
 
-int32 fThread(void *o);
+int32 _fThread(void *o);
 enum {
 	DIRECT, OVERLAY, BITMAP
 };

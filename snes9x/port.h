@@ -131,12 +131,12 @@ typedef unsigned char uint8;
 typedef unsigned short uint16;
 typedef signed char int8;
 typedef short int16;
-#ifdef __BEOS__
+#if defined(__BEOS__) || defined(__HAIKU__)
 typedef long int32;
 #else
 typedef int int32;
 #endif
-#ifdef __BEOS__
+#if defined(__BEOS__) || defined(__HAIKU__)
 typedef unsigned long uint32;
 #else
 typedef unsigned int uint32;

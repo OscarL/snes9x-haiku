@@ -123,7 +123,7 @@ bool s9x_main_window::start_s9x()
 	}
 	exiting = false;
 	DePause();
-	thread = spawn_thread(fThread, "Snes9x", B_NORMAL_PRIORITY, (void *)this);
+	thread = spawn_thread(_fThread, "Snes9x", B_NORMAL_PRIORITY, (void *)this);
 	resume_thread(thread);
 	return true;
 }
@@ -257,7 +257,7 @@ void InitTimer()
 	FrameTimer = 0;
 }
 
-int32 fThread(void *o)
+int32 _fThread(void *o)
 {
 	s9x_main_window *w = (s9x_main_window *)o;
 	s9x = w;
